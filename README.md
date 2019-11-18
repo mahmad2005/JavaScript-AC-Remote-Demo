@@ -1,1 +1,3 @@
-#This is a replica of the GREE AC remote Control
+#Tried to build a replica of a GREE AC remote Control to implement an IoT AC remote control. 
+Last updated 27.10.2018
+Anyone can use the code for his/her projects. 
