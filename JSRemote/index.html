@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html Access-Control-Allow-Origin: http://iot.eee-lab.com>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>AC Remote Control</title>
+		<link rel="stylesheet" href="style.css">
+		<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+		<script>
+//			$(document).ready(function() {
+//				var is_RC_B_Light_clicked = 0;
+//				$('#RC_B_Light').on('click', function() {
+//					if(is_RC_B_Light_clicked == 0){
+//						is_RC_B_Light_clicked = 1;
+//						document.getElementById("DispLight").innerHTML = " ";
+//					}
+//					else{
+//						is_RC_B_Light_clicked = 0;
+//						document.getElementById("DispLight").innerHTML = "&#x1f4a1";
+//					}
+//				});
+//			}); 
+			var is_RC_B_Light_clicked = 0;
+			var temp = 25;
+			var FAN_STATE = 0;
+			var Power_STATE =0;
+			function RC_B_Power(){
+				if(Power_STATE ==0){
+					document.getElementById("DispFAN").style["visibility"] = "visible";
+					document.getElementById("DispTempBox").style["visibility"] = "visible";
+					document.getElementById("dispMode").style["visibility"] = "visible";
+					document.getElementById("DispSwing").style["visibility"] = "visible";
+					Power_STATE =1;
+				}
+				else{
+					document.getElementById("DispFAN").style["visibility"] = "hidden";
+					document.getElementById("DispTempBox").style["visibility"] = "hidden";
+					document.getElementById("dispMode").style["visibility"] = "hidden";
+					document.getElementById("DispSwing").style["visibility"] = "hidden";
+					Power_STATE =0;
+				}
+			}
+			function RC_B_Light() { 
+				if(is_RC_B_Light_clicked == 0){
+						is_RC_B_Light_clicked = 1;
+						document.getElementById("DispLight").innerHTML = " ";
+					}
+					else{
+						is_RC_B_Light_clicked = 0;
+						document.getElementById("DispLight").innerHTML = "&#x1f4a1";
+					}
+			 }
+			function RC_B_UP(){
+				if(temp<30){
+					temp = temp+1;
+					document.getElementById("DispTemp").innerHTML = temp;
+				}
+			}
+			function RC_B_DOWN(){
+				if(temp>16){
+					temp = temp-1;
+					document.getElementById("DispTemp").innerHTML = temp;
+				}
+			}
+			function RC_B_FAN(){
+				FAN_STATE = FAN_STATE+1;
+				if(FAN_STATE>3){
+					FAN_STATE =0;
+					document.getElementById("FAN_STATE_Auto").style["visibility"] = "visible";
+					document.getElementById("DispFanBar").style["visibility"] = "hidden";
+					document.getElementById("FAN_STATE_1").style["background-color"] = "transparent";
+					document.getElementById("FAN_STATE_2").style["background-color"] = "transparent";
+					document.getElementById("FAN_STATE_3").style["background-color"] = "transparent";
+				}
+				if(FAN_STATE == 1){
+					console.log('isChecked 4: ' + FAN_STATE);
+					document.getElementById("FAN_STATE_Auto").style["visibility"] = "hidden";
+					document.getElementById("DispFanBar").style["visibility"] = "visible";
+					document.getElementById("FAN_STATE_1").style["background-color"] = "black";
+				}
+				if(FAN_STATE == 2){
+					console.log('isChecked 4: ' + FAN_STATE);
+					document.getElementById("FAN_STATE_2").style["background-color"] = "black";
+				}
+				if(FAN_STATE == 3){
+					console.log('isChecked 4: ' + FAN_STATE);
+					document.getElementById("FAN_STATE_3").style["background-color"] = "black";
+				}
+			}
+		</script>
+	</head>
+	<body>
+	<center>
+		<div id="RCDisplay">
+			<div id="DispFAN" >
+				<b>FAN</b>
+				<b id="FAN_STATE_Auto">Auto</b>
+				<div id="DispFanBar">
+					<table>
+						<tr>
+							<th id="FAN_STATE_1"></th>
+							<th id="FAN_STATE_2"></th>
+							<th id="FAN_STATE_3"></th>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="DispRoomTemp" >T : 32 &#8451 </div>
+			<div id="DispTempBox">
+				<div id="DispTemp">25</div>
+				<div id="TempUnit">&#8451 </div>
+			</div>
+			<div id="dispMode">COOL</div>
+			<div id="DispSwing">Swing</div>
+			<div id="DispLight"> &#x1f4a1 </div>
+		</div>
+<!-- 		<button >Button </button>
+		<button >Button </button>
+		<button >Button </button>
+		<button >Button </button> -->
+		<div class="RC_Buttons_box">
+			<button class="RC_Button" >MODE </button>
+			<button class="RC_Button is_Power" onclick="RC_B_Power()" >OI</button>
+			<button class="RC_Button" onclick="RC_B_FAN()">FAN </button>
+			
+			<button class="RC_Button" >Swing </button>
+			<button class="RC_Button" onclick="RC_B_UP()" >&#9650 </button>
+			<button class="RC_Button" >Turbo </button>
+			
+			<button class="RC_Button" >Temp </button>
+			<button class="RC_Button" onclick="RC_B_DOWN()" >&#9660 </button>
+			<button class="RC_Button" onclick="RC_B_Light()" >Light </button>
+		</div>
+	</center>
+	</body>
+</html>
